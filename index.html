@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Poop</title>
+	<link rel="shortcut icon" href="static/poop.png">
+	<link rel="stylesheet" href="static/init.css">
+	<script type="text/javascript" src="static/index.js"> </script>
+</head>
+<body>
+<template id="tmpl-block">
+	<div class="item" data-id="{{ id }}">
+		<div class="pic">
+					<span>
+						<img src="{{ img }}">
+					</span>
+		</div>
+		<div class="title">
+					<span>
+						<b>Название</b>: "{{ name }}"
+					</span>
+			<span>
+						<b>Автор</b>: {{ author }}
+					</span>
+		</div>
+		<div class="{{ blockType }}" onclick="items.select(this)"></div>
+	</div>
+
+</template>
+	<h1>Books I like</h1>
+
+	<div id="id01"></div>
+
+	<div class="content">
+		<div style="width: 100%">
+			<input id="inp" type="text" onkeyup="items.keypr()" placeholder="Автор..." ></input>
+		</div>
+		<div class="left">
+
+
+		</div>
+
+		<div class="right">
+			<div class="item">
+				<div class="pic">
+					<span>
+						<img src="http://fantasy-worlds.org/img/preview/154/15467.jpg">
+					</span>
+				</div>
+				<div class="title">
+					<span>
+						<b>Название</b>: "Красное море под красным небом"
+					</span>
+					<span>
+						<b>Автор</b>: Скотт Линч
+					</span>
+				</div>
+				<div class="before">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
