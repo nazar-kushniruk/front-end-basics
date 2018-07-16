@@ -10,14 +10,14 @@ var books = {
             html = htmlLeft = htmlRight = '',
             tmpl = document.getElementById('tmpl-block').innerHTML,
             savedInLocalStorage = readLocalStor();
-        console.log(savedInLocalStorage);
+
         var r = /{{ ([a-z]+) }}/gi;
         for (var id in arr) {
             var data = arr[id];
             data.blockType = (-1 === savedInLocalStorage.indexOf(id)) ? 'after' : 'before';
-            //console.log(data);
+
             var
-                html = tmpl.replace(r, function (b, key, blockType) {
+                html = tmpl.replace(r, function (b, key) {
                     if ('id' == key)
                         return id;
                     return data[key];
@@ -29,12 +29,11 @@ var books = {
             } else {
                 htmlRight += html;
             }
-            // console.log(html);
-            //document.createElement('div');
-            //container.appendChild(html);
         }
         document.getElementsByClassName('left')[0].innerHTML = htmlLeft;
         document.getElementsByClassName('right')[0].innerHTML = htmlRight;
+       var input = document.getElementById('inp').value = '';
+
     },
     load: function () {
         var xmlhttp = new XMLHttpRequest();
@@ -44,8 +43,9 @@ var books = {
             if (this.readyState == 4 && this.status == 200) {
                 var myArr = JSON.parse(this.responseText);
                 books.addElements(myArr);
-               books.createCounter();
-                // console.log(myArr.length);
+                books.createCounterNode();
+                books.addCountedBooks();
+
             }
         };
         xmlhttp.open("GET", url, true);
@@ -53,28 +53,30 @@ var books = {
 
     },
 
-  createCounter:  function () {
-      var rightElements = document.querySelector('.right').children.length,
-          leftEelements = document.querySelector('.left').children.length,
-          rightDiv = document.createElement('div'),
-          leftDiv = document.createElement('div'),
-          divLeft = document.getElementsByClassName('content')[0],
-          divRight = document.getElementsByClassName('content')[0];
+    createCounterNode: function () {
+        var rightDiv = document.createElement('div'),
+            leftDiv = document.createElement('div'),
+            divLeft = document.getElementsByClassName('content')[0],
+            divRight = document.getElementsByClassName('content')[0];
 
-      rightDiv.className = 'counter-right';
-      rightDiv.innerText = rightElements;
+        rightDiv.className = 'counter-right';
+        leftDiv.className = 'counter-left';
 
-      leftDiv.className ='counter-left';
-      leftDiv.innerText = leftEelements;
+        divLeft.appendChild(leftDiv);
+        divRight.appendChild(rightDiv);
 
-      divLeft.appendChild(leftDiv);
-      divRight.appendChild(rightDiv);
-      console.log('left  = ' + leftEelements + ' ;right = ' + rightElements);
+    },
 
-
-  }
-
-
+    addCountedBooks: function () {
+        var rightElements = document.querySelector('.right').children.length,
+            leftEelements = document.querySelector('.left').children.length,
+            divLeft = document.getElementsByClassName('content')[0],
+            divRight = document.getElementsByClassName('content')[0],
+            rightDiv = document.querySelector('.counter-right'),
+            leftDiv = document.querySelector('.counter-left');
+        rightDiv.innerText = rightElements;
+        leftDiv.innerText = leftEelements;
+        }
 };
 
 
@@ -112,6 +114,7 @@ var items = {
 
         }
         saveToLocalStorage();
+        books.addCountedBooks();
     },
 
 
@@ -132,7 +135,7 @@ var items = {
                 item.style = undefined;
             }
         }
-
+        books.addCountedBooks();
     },
 
 
@@ -153,29 +156,12 @@ function saveToLocalStorage() {
     localStorage.setItem("rightItems", serialObj);
 
     var returnObj = JSON.parse(localStorage.getItem("rightItems"));
-    console.log(returnObj);
+
 
 };
 
 function readLocalStor() {
     return JSON.parse(localStorage.getItem("rightItems"));
 
-}
+};
 
-function сounter() {
-    var rightElements = document.querySelector('.right').children.length,
-        leftEelements = document.querySelector('.left').children.length,
-        rightDiv = document.createElement('div'),
-        leftDiv = document.createElement('div');
-
-    rightDiv.className('right');
-    rightDiv.innerText = rightElements;
-
-    leftDiv.className('left');
-    leftDiv.innerText = leftEelements;
-
-
-    console.log('left  = ' + leftEelements + ' ;right = ' + rightElements);
-
-
-}

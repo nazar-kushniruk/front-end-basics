@@ -82,7 +82,7 @@ div {
 
 .counter-left {
 	margin-top: 20px;
-	overflow-y: auto;
+
 	border: 2px solid green;
 	max-height: 600px;
 	min-width: 488px;
@@ -91,9 +91,10 @@ div {
 
 .counter-right {
 	margin-top: 20px;
-	overflow-y: auto;
+
 	border: 2px solid red;
 	max-height: 600px;
-	min-width: 488px;
+	min-width: 400px;
+	max-width: 488px;
 	text-align: center;
 }
